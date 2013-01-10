@@ -13,6 +13,9 @@ WriteMakefile(
     PL_FILES            => {},
     PREREQ_PM => {
         'Test::More' => 0,
+        'Bot::BasicBot::Pluggable' => 0,
+        'URI::Title' => 0,
+        'Module::Load' => 0,
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Bot-BasicBot-Pluggable-Module-CPANLinks-*' },
