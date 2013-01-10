@@ -53,6 +53,44 @@ See L<Bot::BasicBot::Pluggable::Module::Vars> for details on how to set the
 appropriate config options in your bot's store (or do it directly in the DB, if
 you prefer).
 
+The settings to set up are:
+
+=over
+
+=item C<filter_channelname>
+
+Set the pattern which module names must match for a given channel.  If this
+setting doesn't exist for the channel, nothing will be linked.
+
+For example, for C<#dancer>, C<filter_#dancer> is set to C<^Dancer>.
+
+=item C<keywords_channelname>
+
+Set the package from which keywords are linked for a given channel.  If this
+setting doesn't exist for the channel, no keywords will be linked.
+
+If you want to use this, set this setting to the name of the package keywords
+should be looked for in - for instance, for C<#dancer>, C<keywords_#dancer> is
+set to C<Dancer>.  So, if I mention e.g. "see the session keyword", the bot will
+check if C<Dancer->can('session')>, see that that's a valid keyword, and will
+provide a link to the docs.
+
+Be aware that using this setting means the named package will be loaded; this
+means anyone who can configure your bot can cause a package of their choosing to
+be loaded.  However, it's loaded by L<Module::Load> at runtime, so no importing
+will be done, and it can only be a package installed on your system.  It's still
+something to be aware of, though, if you think there's a possibility of code in
+your C<@INC> that you wouldn't want your bot to load.
+
+=item C<dupe_gap>
+
+How many seconds between successive mentions of the same module name / keyword
+to wait before providing a link again.  Nobody wants the bot to respond with a
+link every time a given module name is mentioned.  If not set, defaults to a
+sensible value.
+
+=back
+
 =cut
 
 sub help {
