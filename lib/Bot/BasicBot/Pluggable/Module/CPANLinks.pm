@@ -9,6 +9,8 @@ use Module::Load;
 use URI::Title;
 use 5.010;
 
+our $VERSION = 0.01;
+
 =head1 NAME
 
 Bot::BasicBot::Pluggable::Module::CPANLinks - provide links to CPAN module docs
