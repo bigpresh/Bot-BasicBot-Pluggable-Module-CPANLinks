@@ -47,6 +47,11 @@ anyone who can configure your bot from IRC can cause a package of their choosing
 to be loaded into your bot.  It must be a package which is already installed on
 your system, of course, but it deserves that warning.
 
+=head1 CONFIGURATION
+
+See L<Bot::BasicBot::Pluggable::Module::Vars> for details on how to set the
+appropriate config options in your bot's store (or do it directly in the DB, if
+you prefer).
 
 =cut
 
@@ -120,6 +125,12 @@ sub said {
     return 0; # This message didn't interest us
 }
 
+
+=head1 HOSTED OPTION
+
+If you like the idea of this but don't want to go to the effort of setting it
+up, I have a bot on C<irc.perl.org> already running it, which I'd be happy to
+add to your channel and configure appropriately for you - just drop me a mail.
 
 
 =head1 AUTHOR
