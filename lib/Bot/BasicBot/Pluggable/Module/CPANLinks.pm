@@ -24,20 +24,20 @@ a per-channel basis.
 
 If someone's message looks like it contains a CPAN module name (e.g.
 C<Foo::Bar>), this plugin will look for the bot setting
-C<cpanlinks_filter_$channel> where C<$channel> is the channel that the user
-spoke in - so, e.g. C<cpanlinks_filter_#dancer>.  If this setting exists, its
+C<filter_$channel> where C<$channel> is the channel that the user
+spoke in - so, e.g. C<filter_#dancer>.  If this setting exists, its
 value should be a regular expression; if the module name matches this
 expression, the plugin will look up that module, and, if it exists, provide a
 link to it (unless it has done so more recently than the configurable
 threshold).
 
 Similarly, if someone says something like "the session keyword" or similar, the
-plugin will check if C<cpanlinks_keywords_$channel> exists and is set to a
+plugin will check if C<keywords_$channel> exists and is set to a
 package name; if it does, it will make sure that package is loaded, check if
 that package C<can($keyword)>, and if so, will provide a link to the
 documentation for that keyword.
 
-So, for example, in the C<#dancer> channel, C<cpanlinks_keywords_#dancer> would
+So, for example, in the C<#dancer> channel, C<keywords_#dancer> would
 be set to C<Dancer> - so if I say "the session keyword", the plugin will check
 if C<Dancer->can('session')> to check it's a valid keyword, and if so, will
 provide a link to the docs.
@@ -90,7 +90,7 @@ sub said {
     # keywords for a given module (e.g. Dancer), see if this is a valid keyword,
     # and if so, link to the docs for it
     if (my $keywords_from 
-        = $self->get('cpanlinks_keywords_' . lc $mess->{channel}) 
+        = $self->get('keywords_' . lc $mess->{channel}) 
         && $mess->{body} =~ m{
             (
             # match"the keyword forward", "the keyword 'forward", etc
