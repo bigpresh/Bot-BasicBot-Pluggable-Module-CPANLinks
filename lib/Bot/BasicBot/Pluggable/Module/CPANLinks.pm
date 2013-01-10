@@ -96,7 +96,7 @@ sub said {
     # and if so, link to the docs for it
     if (my $keywords_from 
         = $self->get('keywords_' . lc $mess->{channel}) 
-        && $mess->{body} =~ m{
+        and $mess->{body} =~ m{
             (
             # match"the keyword forward", "the keyword 'forward", etc
             the \s keyword \s ['"]? (?<keyword> [a-z_-]+) ['"]?
@@ -107,7 +107,7 @@ sub said {
         }xm
     ) {
         my $keyword = $+{keyword};
-        warn "Mentioned keyword $keyword, checking it";
+        warn "Mentioned keyword $keyword from $keywords_from, checking it";
         Module::Load::load($keywords_from);
 
         if ($keywords_from->can($keyword)) {
@@ -117,7 +117,8 @@ sub said {
     }
 
     # Announce the link we found, unless we already did that recently
-    if ($link && time - $link_said{$link} > 60) {
+    my $threshold_secs = $self->get('dupe_gap') || 600;
+    if ($link && (time - $link_said{$link}) > $threshold_secs) {
         $link_said{$link} = time;
         return $link;
     }
