@@ -19,4 +19,11 @@ WriteMakefile(
     },
     dist                => { COMPRESS => 'gzip -9f', SUFFIX => 'gz', },
     clean               => { FILES => 'Bot-BasicBot-Pluggable-Module-CPANLinks-*' },
+    META_MERGE => {
+        resources => {
+            repository => 'https://github.com/bigpresh/Bot-BasicBot-Pluggable-Module-CPANLinks',
+            bugtracker => 'https://github.com/bigpresh/Bot-BasicBot-Pluggable-Module-CPANLinks/issues',
+            homepage   => 'https://github.com/bigpresh/Bot-BasicBot-Pluggable-Module-CPANLinks/',
+        },  
+    },
 );
